@@ -3,4 +3,6 @@
 /local/
 /include/
 /bin/
+/dist/
+/protobufp.egg-info/
 
