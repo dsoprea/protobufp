@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-description = "Adds the stream-processing to protobuf messages that you "\
+description = "Adds the stream-processing to protobuf messaging that you "\
               "usually need to add yourself. "
 
 long_description =\
