@@ -7,15 +7,19 @@ from cStringIO import StringIO
 class Serializer(object):
     def __init__(self, processor):
         self.__log = logging.getLogger(self.__class__.__name__)
-        self.__processor = processor
-        self.__mapping = processor.mapping
+        self.__p = processor
+        self.__msg_types = self.__p.msg_types
 
-        self.__mapping_r = dict([(v.__name__, k) 
-                                 for (k, v) 
-                                 in self.__mapping.iteritems()])
+        msg_types_r = {}
+        i = 0
+        for cls in self.__msg_types:
+            msg_types_r[cls.__name__] = i
+            i += 1
+
+        self.__msg_types_r = msg_types_r
 
     def serialize(self, o):
-        type_ = self.__mapping_r[o.__class__.__name__]
+        type_ = self.__msg_types_r[o.__class__.__name__]
         type_string = pack('!I', type_)
 
         serialized = o.SerializeToString()
@@ -28,10 +32,9 @@ class Serializer(object):
         return s.getvalue()
 
     def unserialize(self, serialized):
-        self.__log.debug("Unserializing (%d) bytes." % (len(serialized)))
         (type_,) = unpack('!I', serialized[:4])
 
-        o = self.__mapping[type_]()
+        o = self.__msg_types[type_]()
         o.ParseFromString(serialized[4:])
 
         return o

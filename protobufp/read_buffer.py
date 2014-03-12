@@ -44,8 +44,6 @@ class ReadBuffer(object):
             (four_bytes, last_buffer_index, updates1) = result
             (length,) = unpack('>I', four_bytes)
 
-            self.__log.debug("Length is available: %d" % (length))
-
             result = self.__passive_read(length, last_buffer_index)
             if result is None:
                 return None

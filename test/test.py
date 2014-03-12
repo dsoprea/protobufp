@@ -23,9 +23,9 @@ def get_random_message():
 
 messages = [get_random_message() for i in xrange(5)]
 
-mapping = { 1: TestMsg }
+msg_types = [TestMsg]
 
-p = Processor(mapping)
+p = Processor(msg_types)
 s = StringIO()
 
 # Build the message stream.
@@ -49,7 +49,8 @@ while 1:
     if in_msg is None:
         break
 
-    print("Read message (%d), and now verifying." % (j))
+    print("Read message (%d) of type [%s], and now verifying." % 
+          (j, in_msg.__class__.__name__))
 
     assert messages[j].left == in_msg.left
     assert messages[j].center == in_msg.center

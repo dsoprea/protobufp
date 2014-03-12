@@ -5,11 +5,11 @@ from protobufp.read_buffer import ReadBuffer
 class Processor(object):
     """Automatically identify and unserialize messages.
     
-    mapping is a dictionary of INTs to message classes.
+    msg_types is the list of recognized message classes.
     """
 
-    def __init__(self, mapping):
-        self.__mapping = mapping
+    def __init__(self, msg_types):
+        self.__msg_types = msg_types
         self.__rb = ReadBuffer()
 
     def push(self, data):
@@ -29,6 +29,6 @@ class Processor(object):
             return self.__serializer
 
     @property
-    def mapping(self):
-        return self.__mapping
+    def msg_types(self):
+        return self.__msg_types
 
