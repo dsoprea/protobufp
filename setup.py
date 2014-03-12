@@ -11,7 +11,7 @@ long_description =\
 "automatically deserialize to the correct message type."
 
 setup(name='protobufp',
-      version='0.2.3',
+      version='0.2.4',
       description=description,
       long_description=long_description,
       classifiers=[],
@@ -23,7 +23,7 @@ setup(name='protobufp',
       packages=find_packages(exclude=['test']),
       include_package_data=True,
       zip_safe=False,
-      install_requires=[],
+      install_requires=['protobuf'],
       entry_points="",
 )
 
