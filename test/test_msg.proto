@@ -1,0 +1,6 @@
+message TestMsg {
+    required uint32 left = 1;
+    required string center = 2;
+    required uint32 right = 3;
+}
+
